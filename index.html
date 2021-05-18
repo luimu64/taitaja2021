@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <a id="banner" href="https://iltasanomat.fi">
+        <div id="bannerlogo"><img src="images/compressoitulogo.png" alt="logo"></div>
+        <div id="bannertext">Test how Finnish your school is?</div>
+    </a>
+    <div id="image-container">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 3000 2000">
+            <image xlink:href="images/school.jpg"></image>
+            <a>
+                <rect x="80" y="1723" fill="#fff" opacity="0" width="267" height="430"></rect>
+            </a>
+            <a>
+                <rect x="1747" y="926" fill="#fff" opacity="0" width="430" height="430"></rect>
+            </a>
+            <a>
+                <rect x="2630" y="1557" fill="#fff" opacity="0" width="710" height="357"></rect>
+            </a>
+            <a>
+                <rect x="1493" y="540" fill="#fff" opacity="0" width="360" height="313"></rect>
+            </a>
+        </svg>
+    </div>
+    <div id="text-container">
+        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nisl nulla, porta venenatis mi sed, lacinia
+            bibendum odio. Maecenas sit amet efficitur felis, eu rutrum odio. Proin a porttitor massa.
+        </div>
+        <div>
+            Nunc pharetra tortor vestibulum elit lobortis, vitae placerat ante elementum. Aenean fermentum ornare
+            sapien id commodo.
+        </div>
+        <div>
+            Nullam nec orci ac sem tempus tempor at eget diam. Nulla viverra est vitae turpis laoreet, vel varius ligula
+            tincidunt.
+        </div>
+        <div>
+            Sed id volutpat sem, vitae bibendum mauris. Nullam fringilla sapien vel vehicula faucibus. Donec congue, sem
+            pretium imperdiet luctus, velit quam ullamcorper sem, sit amet porttitor leo eros euismod est.
+        </div>
+    </div>
+</body>
+
+<script>
+    function changeDisplay(element) {
+        console.log(element);
+        if (element.style.display == "block") element.style.display = "block";
+        else element.style.display = "none";
+    }
+
+    let clickables = document.querySelectorAll("svg > a");
+    let text_divs = document.querySelectorAll("#text-container > div");
+    clickables.forEach(element => element.addEventListener("click", changeDisplay(text_divs[1])));
+</script>
+
+</html>

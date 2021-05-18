@@ -1,0 +1,83 @@
+:root {
+    --blue: rgb(34, 52, 108);
+    --light-blue: rgb(0, 96, 157);
+    --grey: rgb(217, 217, 217);
+}
+
+body {
+    font-family: Calibri;
+}
+
+h1, h2, h3 {
+    font-weight: bold;
+}
+
+#banner {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background-color: var(--blue);
+    height: 60px;
+    width: 468px;
+}
+
+a {
+    display: inline-block;
+}
+
+#bannerlogo {
+    margin-left: 1rem;
+    animation: logo 4s ease 3;
+}
+
+#banner #bannertext {
+    color: var(--grey);
+    white-space: nowrap;
+    animation: text 4s ease 3;
+    margin-left: 1rem;
+}
+
+#image-container {
+    width: 100vh;
+}
+
+#text-container * {
+    display: none;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+@keyframes text {
+    0% {
+        margin-left: 1rem;
+        font-size: large;
+    }
+    30% {
+        margin-left: 1rem;
+        font-size: medium;
+    }
+    90% {
+        margin-left: 30rem;
+    }
+    100% {
+        margin-left: 1rem;
+        font-size: large;
+    }
+}
+
+@keyframes logo {
+    0% {
+        margin-bottom: 0;
+    }
+    30% {
+        margin-bottom: 0;
+    }
+    90% {
+        margin-bottom: 10rem;
+    }
+    100% {
+        margin-bottom: 0;
+    }
+}
