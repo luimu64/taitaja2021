@@ -73,29 +73,35 @@ xmlhttp.onreadystatechange = function() {
             datasets: [
                 {
                     label: 'Testikohteiden tulokset',
-                    backgroundColor: '#000000',
-                    borderColor: '#AAAAAA',
+                    backgroundColor: '#ABCDEF',
+                    borderColor: '#DDDDDD',
                     hoverBackgroundColor: '#CCCCCC',
                     hoverBorderColor: '#666666',
+                    borderDash: [5, 5],
+                    fill: true,
                     data: grade
                 }
             ]
         };
 
         var ctx = document.getElementById('myChart').getContext('2d');
-
+        var delayed;
         var barGraph = new Chart(ctx, {
             type: 'line',
             data: chartdata,
             options: {
-                animations: {
-                tension: {
-                    duration: 1000,
-                    easing: 'linear',
-                    from: 1,
-                    to: 0,
-                    loop: true
-                }
+                responsive: true,
+                animation: {
+                onComplete: () => {
+                    delayed = true;
+                },
+                delay: (context) => {
+                    let delay = 0;
+                    if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                    delay = context.dataIndex * 300 + context.datasetIndex * 100;
+                    }
+                    return delay;
+                },
             }
             }
         });
