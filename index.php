@@ -72,9 +72,9 @@ xmlhttp.onreadystatechange = function() {
             labels: name,
             datasets: [
                 {
-                    label: 'Example test',
-                    backgroundColor: '#49e2ff',
-                    borderColor: '#46d5f1',
+                    label: 'Testikohteiden tulokset',
+                    backgroundColor: '#000000',
+                    borderColor: '#AAAAAA',
                     hoverBackgroundColor: '#CCCCCC',
                     hoverBorderColor: '#666666',
                     data: grade
@@ -85,8 +85,19 @@ xmlhttp.onreadystatechange = function() {
         var ctx = document.getElementById('myChart').getContext('2d');
 
         var barGraph = new Chart(ctx, {
-            type: 'bar',
-            data: chartdata
+            type: 'line',
+            data: chartdata,
+            options: {
+                animations: {
+                tension: {
+                    duration: 1000,
+                    easing: 'linear',
+                    from: 1,
+                    to: 0,
+                    loop: true
+                }
+            }
+            }
         });
 
         barGraph.canvas.parentNode.style.width = '1000px';
