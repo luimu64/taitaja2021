@@ -4,8 +4,10 @@
     --grey: rgb(217, 217, 217);
 }
 
-body {
+* {
     font-family: Calibri;
+    margin: 0;
+    padding: 0;
 }
 
 h1, h2, h3 {
@@ -49,6 +51,11 @@ a:hover {
     cursor: pointer;
 }
 
+img { 
+    width: 100%;
+    height: auto;
+}
+
 @keyframes text {
     0% {
         margin-left: 1rem;
@@ -68,16 +75,10 @@ a:hover {
 }
 
 @keyframes logo {
-    0% {
-        margin-bottom: 0;
+    from {
+        transform: rotate(0);
     }
-    30% {
-        margin-bottom: 0;
-    }
-    90% {
-        margin-bottom: 10rem;
-    }
-    100% {
-        margin-bottom: 0;
+    to {
+        transform: rotate(360deg);
     }
 }

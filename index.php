@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js" integrity="sha512-VMsZqo0ar06BMtg0tPsdgRADvl0kDHpTbugCBBrL55KmucH6hP9zWdLIWY//OTfMnzz6xWQRxQqsUFefwHuHyg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Document</title>
 </head>
 
@@ -15,8 +16,8 @@
     </a>
     <div id="image-container">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="0 0 3000 2000">
-            <image xlink:href="images/school.jpg"></image>
+            viewBox="0 0 3535 2500" width="1000">
+            <image width=" 3535" height="2500" xlink:href="images/school.jpg"></image>
             <a>
                 <rect x="80" y="1723" fill="#fff" opacity="0" width="267" height="430"></rect>
             </a>
@@ -49,17 +50,64 @@
         </div>
     </div>
 </body>
+<div><canvas id="myChart" width="10" height="10"></canvas></div>
+
 
 <script>
+
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var name = [];
+        var grade = [];
+
+        let data = JSON.parse(this.responseText);
+
+        for (var i in data) {
+            name.push(data[i]["name"]);
+            grade.push(data[i]["grade"]);
+        }
+
+        var chartdata = {
+            labels: name,
+            datasets: [
+                {
+                    label: 'Example test',
+                    backgroundColor: '#49e2ff',
+                    borderColor: '#46d5f1',
+                    hoverBackgroundColor: '#CCCCCC',
+                    hoverBorderColor: '#666666',
+                    data: grade
+                }
+            ]
+        };
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+        var barGraph = new Chart(ctx, {
+            type: 'bar',
+            data: chartdata
+        });
+
+        barGraph.canvas.parentNode.style.width = '1000px';
+      }
+    };
+
+xmlhttp.open("GET","query.php", true);
+xmlhttp.send();
+
+
     function changeDisplay(element) {
-        console.log(element);
-        if (element.style.display == "block") element.style.display = "block";
-        else element.style.display = "none";
+        if (element.style.display == "block") element.style.display = "none";
+        else element.style.display = "block";
     }
 
     let clickables = document.querySelectorAll("svg > a");
     let text_divs = document.querySelectorAll("#text-container > div");
-    clickables.forEach(element => element.addEventListener("click", changeDisplay(text_divs[1])));
+
+    for (let i = 0; i < clickables.length; i++) {
+        clickables[i].addEventListener("click", () => changeDisplay(text_divs[i]));
+    }
 </script>
 
 </html>
