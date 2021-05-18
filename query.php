@@ -10,5 +10,3 @@ $sql = "SELECT * FROM chart";
 $stm = $pdo->query($sql);
 $results = $stm->fetchAll(PDO::FETCH_ASSOC);
 echo json_encode($results);
-
-?>

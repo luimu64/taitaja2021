@@ -15,8 +15,7 @@
         <div id="bannertext">Test how Finnish your school is?</div>
     </a>
     <div id="image-container">
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="0 0 3535 2500" width="1000">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 3535 2500" width="1000">
             <image width=" 3535" height="2500" xlink:href="images/school.jpg"></image>
             <a>
                 <rect x="80" y="1723" fill="#fff" opacity="0" width="267" height="430"></rect>
@@ -54,64 +53,60 @@
 
 
 <script>
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var name = [];
+            var grade = [];
 
-var xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        var name = [];
-        var grade = [];
+            let data = JSON.parse(this.responseText);
 
-        let data = JSON.parse(this.responseText);
+            for (var i in data) {
+                name.push(data[i]["name"]);
+                grade.push(data[i]["grade"]);
+            }
 
-        for (var i in data) {
-            name.push(data[i]["name"]);
-            grade.push(data[i]["grade"]);
-        }
-
-        var chartdata = {
-            labels: name,
-            datasets: [
-                {
+            var chartdata = {
+                labels: name,
+                datasets: [{
                     label: 'Testikohteiden tulokset',
                     backgroundColor: '#ABCDEF',
-                    borderColor: '#DDDDDD',
+                    borderColor: '#ABCDEF',
                     hoverBackgroundColor: '#CCCCCC',
                     hoverBorderColor: '#666666',
                     borderDash: [5, 5],
                     fill: true,
                     data: grade
-                }
-            ]
-        };
+                }]
+            };
 
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var delayed;
-        var barGraph = new Chart(ctx, {
-            type: 'line',
-            data: chartdata,
-            options: {
-                responsive: true,
-                animation: {
-                onComplete: () => {
-                    delayed = true;
-                },
-                delay: (context) => {
-                    let delay = 0;
-                    if (context.type === 'data' && context.mode === 'default' && !delayed) {
-                    delay = context.dataIndex * 300 + context.datasetIndex * 100;
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var delayed;
+            var barGraph = new Chart(ctx, {
+                type: 'line',
+                data: chartdata,
+                options: {
+                    responsive: true,
+                    animation: {
+                        onComplete: () => {
+                            delayed = true;
+                        },
+                        delay: (context) => {
+                            let delay = 0;
+                            if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                                delay = context.dataIndex * 300 + context.datasetIndex * 100;
+                            }
+                            return delay;
+                        },
                     }
-                    return delay;
-                },
-            }
-            }
-        });
-
-        barGraph.canvas.parentNode.style.width = '1000px';
-      }
+                }
+            });
+            barGraph.canvas.parentNode.style.width = '1000px';
+        }
     };
 
-xmlhttp.open("GET","query.php", true);
-xmlhttp.send();
+    xmlhttp.open("GET", "query.php", true);
+    xmlhttp.send();
 
 
     function changeDisplay(element) {
