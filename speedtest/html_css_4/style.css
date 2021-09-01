@@ -1,0 +1,4 @@
+/* Your code here */
+h1 + p:first-of-type {
+    color: pink;
+}
